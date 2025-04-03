@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // ✅ Import Link
+
 
 const LandingPage = () => {
   const [tripType, setTripType] = useState('one-way');
@@ -61,13 +63,17 @@ const LandingPage = () => {
           </nav>
                     {/* Login and Sign Up Buttons */}
                     <div className="flex space-x-2">
-  <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
-    Login
-  </button>
-  <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
-    Sign Up
-  </button>
-</div>
+      <Link to="/login">
+        <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
+          Login
+        </button>
+      </Link>
+      <Link to="/signup">
+        <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
+          Sign Up
+        </button>
+      </Link>
+    </div>
 
 
 
