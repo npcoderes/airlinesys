@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 
 const LandingPage = () => {
-  const [departure, setDeparture] = useState("");
-  const [destination, setDestination] = useState("");
-  const [date, setDate] = useState("");
+  const [tripType, setTripType] = useState('one-way');
+  const [departure, setDeparture] = useState('');
+  const [destination, setDestination] = useState('');
+  const [departureDate, setDepartureDate] = useState('');
+  const [returnDate, setReturnDate] = useState('');
+  const [passengers, setPassengers] = useState(1);
+  const [travelClass, setTravelClass] = useState('Economy');
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleSearch = () => {
-    alert(`Searching flights from ${departure} to ${destination} on ${date}`);
+    console.log({
+      tripType,
+      departure,
+      destination,
+      departureDate,
+      returnDate: tripType === 'round-trip' ? returnDate : null,
+      passengers,
+      travelClass,
+    });
   };
 
   return (
@@ -48,14 +60,15 @@ const LandingPage = () => {
             </a>
           </nav>
                     {/* Login and Sign Up Buttons */}
-                    <div className="flex space-x-4">
-            <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-2 px-6 rounded-lg shadow-md transform hover:scale-105">
-              Login
-            </button>
-            <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-2 px-6 rounded-lg shadow-md transform hover:scale-105">
-              Sign Up
-            </button>
-          </div>
+                    <div className="flex space-x-2">
+  <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
+    Login
+  </button>
+  <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
+    Sign Up
+  </button>
+</div>
+
 
 
           {/* Mobile Menu Toggle Button */}
@@ -144,64 +157,100 @@ const LandingPage = () => {
 
         {/* Hero Section with Flight Search */}
         <section className="bg-blue-100 text-center py-12">
-          <div>
-            <h1 className="text-5xl font-bold text-blue-800 mb-4">
-              Book Your Flight Now
-            </h1>
-            <p className="text-xl mb-6 text-gray-600">
-              Find the best deals and fly with comfort and ease.
-            </p>
-            <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-xl">
-              <h2 className="text-2xl font-semibold mb-4 text-blue-600">
-                Search Flights
-              </h2>
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Departure
-                  </label>
-                  <input
-                    type="text"
-                    value={departure}
-                    onChange={(e) => setDeparture(e.target.value)}
-                    className="w-full p-3 mt-2 border rounded-lg"
-                    placeholder="From"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Destination
-                  </label>
-                  <input
-                    type="text"
-                    value={destination}
-                    onChange={(e) => setDestination(e.target.value)}
-                    className="w-full p-3 mt-2 border rounded-lg"
-                    placeholder="To"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full p-3 mt-2 border rounded-lg"
-                  />
-                </div>
-                <button
-                  onClick={handleSearch}
-                  className="w-full bg-blue-600 text-white py-3 mt-4 rounded-lg hover:bg-blue-700 transition duration-300"
-                >
-                  Search Flights
-                </button>
-              </div>
+      <div>
+        <h1 className="text-5xl font-bold text-blue-800 mb-4">
+          Book Your Flight Now
+        </h1>
+        <p className="text-xl mb-6 text-gray-600">
+          Find the best deals and fly with comfort and ease.
+        </p>
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-xl">
+          <h2 className="text-2xl font-semibold mb-4 text-blue-600">Search Flights</h2>
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Trip Type</label>
+              <select
+                value={tripType}
+                onChange={(e) => setTripType(e.target.value)}
+                className="w-full p-3 mt-2 border rounded-lg"
+              >
+                <option value="one-way">One-Way</option>
+                <option value="round-trip">Round-Trip</option>
+              </select>
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Departure</label>
+              <input
+                type="text"
+                value={departure}
+                onChange={(e) => setDeparture(e.target.value)}
+                className="w-full p-3 mt-2 border rounded-lg"
+                placeholder="From"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Destination</label>
+              <input
+                type="text"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                className="w-full p-3 mt-2 border rounded-lg"
+                placeholder="To"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Departure Date</label>
+              <input
+                type="date"
+                value={departureDate}
+                onChange={(e) => setDepartureDate(e.target.value)}
+                className="w-full p-3 mt-2 border rounded-lg"
+              />
+            </div>
+            {tripType === 'round-trip' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Return Date</label>
+                <input
+                  type="date"
+                  value={returnDate}
+                  onChange={(e) => setReturnDate(e.target.value)}
+                  className="w-full p-3 mt-2 border rounded-lg"
+                />
+              </div>
+            )}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Passengers</label>
+              <input
+                type="number"
+                min="1"
+                value={passengers}
+                onChange={(e) => setPassengers(e.target.value)}
+                className="w-full p-3 mt-2 border rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Class</label>
+              <select
+                value={travelClass}
+                onChange={(e) => setTravelClass(e.target.value)}
+                className="w-full p-3 mt-2 border rounded-lg"
+              >
+                <option value="Economy">Economy</option>
+                <option value="Business">Business</option>
+                <option value="First-Class">First-Class</option>
+              </select>
+            </div>
+            <button
+              onClick={handleSearch}
+              className="w-full bg-blue-600 text-white py-3 mt-4 rounded-lg hover:bg-blue-700 transition duration-300"
+            >
+              Search Flights
+            </button>
           </div>
-        </section>
-
+        </div>
+      </div>
+    </section>''
+  
         {/* Features Section */}
         <section id="features" className="py-16 bg-white">
           <div className="container mx-auto text-center">
