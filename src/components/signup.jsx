@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+{/* i want code like when user succesfully loged create a proflie logo  beside the navbar when user click on profile logo say hi and (username) with logout funtion when click on logout function remove data from local storage and store data when user login in local storage i will give my landing page for set the logo in landing page */}
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,61 +13,65 @@ const Signup = () => {
     e.preventDefault();
     setError("");
 
-    if (!name || !email || !password) {
+    if (!name.trim() || !email.trim() || !password.trim()) {
       setError("All fields are required");
       return;
     }
 
     try {
-      await axios.post("http://localhost:5000/api/signup", { name, email, password });
-
-      alert("Signup Successful! Please login.");
+      await axios.post("http://localhost:8081/signup", {
+        name,
+        email,
+        password,
+      });
       navigate("/login");
     } catch (err) {
-      setError("Signup failed. Try again!");
+      setError("Signup failed");
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-96">
-        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-700">Sign Up</h2>
-
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">Create Account</h2>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <form onSubmit={handleSignup} className="space-y-4">
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full p-3 border rounded-md focus:ring focus:ring-blue-300 outline-none"
             value={name}
+            className="w-full px-4 py-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 border rounded-md focus:ring focus:ring-blue-300 outline-none"
             value={email}
+            className="w-full px-4 py-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
-            className="w-full p-3 border rounded-md focus:ring focus:ring-blue-300 outline-none"
             value={password}
+            className="w-full px-4 py-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition"
           >
             Sign Up
           </button>
         </form>
 
-        <p className="text-center text-gray-500 text-sm mt-4">
-          Already have an account? <a href="/login" className="text-blue-600">Login</a>
+        <p className="text-sm text-center text-gray-500 mt-4">
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-600 hover:underline">
+            Login here
+          </a>
         </p>
       </div>
     </div>
