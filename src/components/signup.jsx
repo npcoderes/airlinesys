@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-{/* i want code like when user succesfully loged create a proflie logo  beside the navbar when user click on profile logo say hi and (username) with logout funtion when click on logout function remove data from local storage and store data when user login in local storage i will give my landing page for set the logo in landing page */}
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
