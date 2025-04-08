@@ -30,8 +30,8 @@ const LandingPage = () => {
       <header className="bg-transparent fixed w-full z-10 top-0 left-0">
         <div className="container mx-auto flex justify-between items-center py-4">
           {/* Logo */}
-          <div className="text-3xl font-bold text-blue-600">
-            <span className="text-blue-800">Fly</span>WithUs
+          <div className="text-3xl font-bold text-black-600">
+            <span className="text-black-800">Fly</span>WithUs
           </div>
 
           {/* Navbar Links */}
@@ -162,7 +162,7 @@ const LandingPage = () => {
         </section>
 
         {/* Hero Section with Flight Search */}
-        <section className="bg-blue-100 text-center py-12">
+        <section className="bg-white-100 text-center py-12">
       <div>
         <h1 className="text-5xl font-bold text-blue-800 mb-4">
           Book Your Flight Now
