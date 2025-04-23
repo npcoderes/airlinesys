@@ -19,11 +19,12 @@ const Signup = () => {
     }
 
     try {
-      await axios.post("http://localhost:8081/signup", {
+     const res= await axios.post("http://localhost:5000/register", {
         name,
         email,
         password,
       });
+      console.log(res.data);
       navigate("/login");
     } catch (err) {
       setError("Signup failed");

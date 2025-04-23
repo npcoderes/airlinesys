@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // ✅ Import Link
 
 
@@ -23,6 +23,12 @@ const LandingPage = () => {
       travelClass,
     });
   };
+
+  let token = localStorage.getItem("token");
+ 
+  console.log(token);
+
+
 
   return (
     <div className="font-sans text-gray-900 min-h-screen bg-gray-50 m-0 p-0">
@@ -61,19 +67,28 @@ const LandingPage = () => {
               Contact
             </a>
           </nav>
-                    {/* Login and Sign Up Buttons */}
-                    <div className="flex space-x-2">
-      <Link to="/login">
-        <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
-          Login
-        </button>
-      </Link>
-      <Link to="/signup">
-        <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
-          Sign Up
-        </button>
-      </Link>
-    </div>
+          {/* Login and Sign Up Buttons */}
+          {
+            token ? (
+              <Link to="/dashboard" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                Dashboard
+              </Link>
+            ) : (
+              <div className="flex space-x-2">
+              <Link to="/login">
+                <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
+                  Login
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button className="text-white bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out py-1 px-4 rounded-md shadow-sm transform hover:scale-105">
+                  Sign Up
+                </button>
+              </Link>
+            </div>
+            )
+          }
+         
 
 
 
@@ -163,100 +178,100 @@ const LandingPage = () => {
 
         {/* Hero Section with Flight Search */}
         <section className="bg-white-100 text-center py-12">
-      <div>
-        <h1 className="text-5xl font-bold text-blue-800 mb-4">
-          Book Your Flight Now
-        </h1>
-        <p className="text-xl mb-6 text-gray-600">
-          Find the best deals and fly with comfort and ease.
-        </p>
-        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-xl">
-          <h2 className="text-2xl font-semibold mb-4 text-blue-600">Search Flights</h2>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Trip Type</label>
-              <select
-                value={tripType}
-                onChange={(e) => setTripType(e.target.value)}
-                className="w-full p-3 mt-2 border rounded-lg"
-              >
-                <option value="one-way">One-Way</option>
-                <option value="round-trip">Round-Trip</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Departure</label>
-              <input
-                type="text"
-                value={departure}
-                onChange={(e) => setDeparture(e.target.value)}
-                className="w-full p-3 mt-2 border rounded-lg"
-                placeholder="From"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Destination</label>
-              <input
-                type="text"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="w-full p-3 mt-2 border rounded-lg"
-                placeholder="To"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Departure Date</label>
-              <input
-                type="date"
-                value={departureDate}
-                onChange={(e) => setDepartureDate(e.target.value)}
-                className="w-full p-3 mt-2 border rounded-lg"
-              />
-            </div>
-            {tripType === 'round-trip' && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Return Date</label>
-                <input
-                  type="date"
-                  value={returnDate}
-                  onChange={(e) => setReturnDate(e.target.value)}
-                  className="w-full p-3 mt-2 border rounded-lg"
-                />
+          <div>
+            <h1 className="text-5xl font-bold text-blue-800 mb-4">
+              Book Your Flight Now
+            </h1>
+            <p className="text-xl mb-6 text-gray-600">
+              Find the best deals and fly with comfort and ease.
+            </p>
+            <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-xl">
+              <h2 className="text-2xl font-semibold mb-4 text-blue-600">Search Flights</h2>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Trip Type</label>
+                  <select
+                    value={tripType}
+                    onChange={(e) => setTripType(e.target.value)}
+                    className="w-full p-3 mt-2 border rounded-lg"
+                  >
+                    <option value="one-way">One-Way</option>
+                    <option value="round-trip">Round-Trip</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Departure</label>
+                  <input
+                    type="text"
+                    value={departure}
+                    onChange={(e) => setDeparture(e.target.value)}
+                    className="w-full p-3 mt-2 border rounded-lg"
+                    placeholder="From"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Destination</label>
+                  <input
+                    type="text"
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    className="w-full p-3 mt-2 border rounded-lg"
+                    placeholder="To"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Departure Date</label>
+                  <input
+                    type="date"
+                    value={departureDate}
+                    onChange={(e) => setDepartureDate(e.target.value)}
+                    className="w-full p-3 mt-2 border rounded-lg"
+                  />
+                </div>
+                {tripType === 'round-trip' && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Return Date</label>
+                    <input
+                      type="date"
+                      value={returnDate}
+                      onChange={(e) => setReturnDate(e.target.value)}
+                      className="w-full p-3 mt-2 border rounded-lg"
+                    />
+                  </div>
+                )}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Passengers</label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={passengers}
+                    onChange={(e) => setPassengers(e.target.value)}
+                    className="w-full p-3 mt-2 border rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Class</label>
+                  <select
+                    value={travelClass}
+                    onChange={(e) => setTravelClass(e.target.value)}
+                    className="w-full p-3 mt-2 border rounded-lg"
+                  >
+                    <option value="Economy">Economy</option>
+                    <option value="Business">Business</option>
+                    <option value="First-Class">First-Class</option>
+                  </select>
+                </div>
+                <button
+                  onClick={handleSearch}
+                  className="w-full bg-blue-600 text-white py-3 mt-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                  Search Flights
+                </button>
               </div>
-            )}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Passengers</label>
-              <input
-                type="number"
-                min="1"
-                value={passengers}
-                onChange={(e) => setPassengers(e.target.value)}
-                className="w-full p-3 mt-2 border rounded-lg"
-              />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Class</label>
-              <select
-                value={travelClass}
-                onChange={(e) => setTravelClass(e.target.value)}
-                className="w-full p-3 mt-2 border rounded-lg"
-              >
-                <option value="Economy">Economy</option>
-                <option value="Business">Business</option>
-                <option value="First-Class">First-Class</option>
-              </select>
-            </div>
-            <button
-              onClick={handleSearch}
-              className="w-full bg-blue-600 text-white py-3 mt-4 rounded-lg hover:bg-blue-700 transition duration-300"
-            >
-              Search Flights
-            </button>
           </div>
-        </div>
-      </div>
-    </section>''
-  
+        </section>''
+
         {/* Features Section */}
         <section id="features" className="py-16 bg-white">
           <div className="container mx-auto text-center">
@@ -291,7 +306,7 @@ const LandingPage = () => {
                   flight.
                 </p>
               </div>
-            
+
               <div className="p-6 bg-blue-50 rounded-lg shadow-lg">
                 <h3 className="text-2xl font-semibold mb-4 text-blue-600">
                   24/7 Customer Support
@@ -483,60 +498,60 @@ const LandingPage = () => {
         </section>
       </main>
 
-      {/* Footer Section */} 
+      {/* Footer Section */}
       <section id="footer">
 
-    <footer className="bg-gray-900 text-white py-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Logo and Company Info */}
-          <div>
-            <h2 className="text-3xl font-bold mb-4">FlyWithUs</h2>
-            <p className="mb-4">Leading the way in innovation, creativity, and customer satisfaction.</p>
-            <div className="flex space-x-4">
-              {/* Social Media Links */}
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-400">
-                <i className="fab fa-facebook-f"></i> Facebook
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-200">
-                <i className="fab fa-twitter"></i> X
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-400">
-                <i className="fab fa-instagram"></i> Instagram
-              </a>
+        <footer className="bg-gray-900 text-white py-10">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Logo and Company Info */}
+              <div>
+                <h2 className="text-3xl font-bold mb-4">FlyWithUs</h2>
+                <p className="mb-4">Leading the way in innovation, creativity, and customer satisfaction.</p>
+                <div className="flex space-x-4">
+                  {/* Social Media Links */}
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-400">
+                    <i className="fab fa-facebook-f"></i> Facebook
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-200">
+                    <i className="fab fa-twitter"></i> X
+                  </a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-400">
+                    <i className="fab fa-instagram"></i> Instagram
+                  </a>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul>
+                  <li><a href="/about" className="hover:text-gray-400">About Us</a></li>
+                  <li><a href="/services" className="hover:text-gray-400">Services</a></li>
+                  <li><a href="/contact" className="hover:text-gray-400">Contact</a></li>
+                  <li><a href="/privacy-policy" className="hover:text-gray-400">Privacy Policy</a></li>
+                </ul>
+              </div>
+
+              {/* Contact Info */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+                <ul>
+                  <li>Email: <a href="mailto:support@yourcompany.com" className="hover:text-gray-400">flywithus.com</a></li>
+                  <li>Phone: <a href="tel:+1234567890" className="hover:text-gray-400">+123 456 7890</a></li>
+                  <li>Address: 123 iskon empario, Ahmedabad, india</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-10 border-t border-gray-700 pt-6">
+              <p className="text-center text-sm text-gray-400">
+                &copy; {new Date().getFullYear()} FlyWithUs. All rights reserved.
+              </p>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul>
-              <li><a href="/about" className="hover:text-gray-400">About Us</a></li>
-              <li><a href="/services" className="hover:text-gray-400">Services</a></li>
-              <li><a href="/contact" className="hover:text-gray-400">Contact</a></li>
-              <li><a href="/privacy-policy" className="hover:text-gray-400">Privacy Policy</a></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-            <ul>
-              <li>Email: <a href="mailto:support@yourcompany.com" className="hover:text-gray-400">flywithus.com</a></li>
-              <li>Phone: <a href="tel:+1234567890" className="hover:text-gray-400">+123 456 7890</a></li>
-              <li>Address: 123 iskon empario, Ahmedabad, india</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-10 border-t border-gray-700 pt-6">
-          <p className="text-center text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} FlyWithUs. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
-    </section>
+        </footer>
+      </section>
     </div>
   );
 };
